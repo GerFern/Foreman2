@@ -35,7 +35,7 @@ jobs:
               }
             };
             await exec.exec('git', ['describe'], options);
-            return ret.substring(1).split('-')[0]
+            return ret.substring(1).split('-')[0].trim()
           result-encoding: string
       - name: Install .NET
         uses: actions/setup-dotnet@v5.2.0
