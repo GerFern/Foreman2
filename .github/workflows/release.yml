@@ -29,7 +29,7 @@ jobs:
               }
             };
             await exec.exec('git', ['describe'], options);
-            return ret.substring(1).split('-')[0]
+            return ret.substring(1).trim()
           result-encoding: string
       - name: Install .NET
         uses: actions/setup-dotnet@v5.2.0
@@ -37,7 +37,7 @@ jobs:
           dotnet-version: '10.x'
       - name: Restore Dependencies
         run: dotnet restore -r win-x64
-      - name: Build Foreman Snapshot
+      - name: Build Foreman Release
         run: dotnet build Foreman -p:VersionPrefix=${{steps.tag.outputs.result}} -p:IncludeSourceRevisionInInformationalVersion=false --configuration Release -r win-x64
       - name: Test Foreman
         run: dotnet test --configuration Release -r win-x64
